@@ -28,7 +28,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
+<<<<<<< HEAD
     protected $redirectTo = '/home';
+=======
+    protected $redirectTo = '/dashboard';
+>>>>>>> 60a2a5eb58611068f4fae03b4582bb0b291f8d79
 
     /**
      * Create a new controller instance.
@@ -49,9 +53,19 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+<<<<<<< HEAD
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+=======
+            'name' => ['required','string','max:255'],
+            'ucountry' => ['required','max:255'],
+            'utype' => ['required'],
+            'username' => ['required','string','max:255','unique:users'],
+            'email' => ['required','string','email','max:255','unique:users'],
+            'password' => ['required','string','min:8','confirmed'],
+           
+>>>>>>> 60a2a5eb58611068f4fae03b4582bb0b291f8d79
         ]);
     }
 
@@ -65,6 +79,12 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+<<<<<<< HEAD
+=======
+            'ucountry' => $data['ucountry'],
+            'utype' => $data['utype'],
+            'username' => $data['username'],
+>>>>>>> 60a2a5eb58611068f4fae03b4582bb0b291f8d79
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
