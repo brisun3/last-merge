@@ -34,7 +34,16 @@
     h5{
       font-weight:bold !important;
     }
-    
+    .ptimg{
+      max-width: 100%;
+      height: auto;
+      width: auto\9; /* ie8 */
+    }
+    .ptimgsub{
+      max-width: 50%;
+      height: auto;
+      width: auto\9; /* ie8 */
+    }
        
         
 

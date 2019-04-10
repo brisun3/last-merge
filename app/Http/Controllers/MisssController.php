@@ -30,7 +30,7 @@ class MisssController extends Controller
         // $posts = Post::where('status','free')->get();
         $posts = Miss::orderBy('uname','asc')->get();
         //$posts = Post::orderBy('name','asc')->get();
-        
+
         return view('posts.index')->with('posts', $posts);
     }
 
@@ -44,7 +44,7 @@ class MisssController extends Controller
         $user_type=Auth::user()->utype;
         $ucountry=Auth::user()->ucountry;
         $uname=Auth::user()->username;
-            
+
             switch($user_type){
                 case('miss'):
                     return view('posts/create')->with('ucountry',$ucountry)->with('uname',$uname);
@@ -58,9 +58,9 @@ class MisssController extends Controller
                     return view('posts/comercial_create');
                 case('holiday'):
                     return view('posts/holiday_create');
-                
+
             }
-            
+
     }
 
     /**
@@ -80,13 +80,13 @@ class MisssController extends Controller
         ]);
 
         $uname=auth()->user()->username;
-        
+
         $status = new Status;
         $status_uname=Status::where('uname', '=', $uname)->first();
         if ($status_uname===null) {
             // user found
-         
-        
+
+
             $miss = new Miss;
             //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
             $miss->city = $request->input('city');
@@ -94,11 +94,11 @@ class MisssController extends Controller
             $miss->tel = $request->input('tel');
             $miss->addr1 = $request->input('addr1');
             $miss->addr2 = $request->input('addr2');
-            
+
             // Handle File Upload
             $i=0;
             if($request->hasFile('filename')){
-                
+
                 foreach ($request->file('filename') as $photo){
                     // Get filename with the extension
                     $filenameWithExt = $photo->getClientOriginalName();
@@ -121,20 +121,42 @@ class MisssController extends Controller
             }
 
             // Create Post
-            
+
             //$miss->img_name = $fileNameToStore[0];
             //if($i>0)
             //need to modify, there is error if only 1 file to upload
             //$img1= $fileNameToStore[1];
-            
-            
+
+
             //$miss->img1=$img1;
-            
+
 
             //$miss->user_id = $request->input('user_id');
             $miss->intro = $request->input('intro');
-            $miss->type = $request->type;
-            
+            $miss->age = $request->input('age');
+            $miss->national = $request->input('national');
+            $miss->shape= $request->input('shape');
+            $miss->skin = $request->input('skin');
+            $miss->height = $request->input('height');
+            $miss->chest= $request->input('chest');
+            $miss->waist = $request->input('waist');
+            $miss->weight= $request->input('weight');
+            $miss->lan1 = $request->input('lan1');
+            $miss->lan2 = $request->input('lan2');
+            $miss->lan_des= $request->input('lan_des');
+            $miss->price30 = $request->input('price30');
+            $miss->price1h = $request->input('price1h');
+            $miss->price_out = $request->input('price_out');
+            $miss->price_note= $request->input('price_note');
+            $miss->service_des = $request->input('service_des');
+            $miss->special_serv = $request->input('special_serv');
+            $miss->western_serv = $request->has('western_serv');
+
+
+
+           
+            //$miss->type = $request->type;
+
             //give 2 months free using
             //$miss->expire_at = date('Y-m-d', strtotime(' + 2months'));
             //$post->cover_image = $fileNameToStore;
@@ -144,14 +166,14 @@ class MisssController extends Controller
 
 
             //store data to status tbl
-            
+
             //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
             $status->user_id = auth()->user()->id;
             $status->uname = $uname;
             $status->utype = auth()->user()->utype;
             $status->ucountry = auth()->user()->ucountry;
             $status->verified= 0;
-            
+
             $status->status= 'free';
             $status->expire_at = date('Y-m-d', strtotime(' + 2months'));
             $status->last_update=date("Y-m-d");
@@ -160,17 +182,17 @@ class MisssController extends Controller
 
 
             //email to miss
-            
-            
-            Mail::to(Auth::user()->email)->send(new EmailClass('regConf.missReg',$uname));
-            
-    
+
+
+            //Mail::to(Auth::user()->email)->send(new EmailClass('regConf.missReg',$uname));
+
+
        //////
-        return redirect('/posts')->with('success', 'Post Created');
+        return redirect('/')->with('success', '上传成功！');
         }else{
-            return redirect('/posts')->with('fail', 'U have post already');
+            return redirect('/')->with('error', '你的资料已经传过了！');
         }
-   
+
     }
 
     /**
@@ -181,7 +203,7 @@ class MisssController extends Controller
      */
     public function email()
     { Mail::to(Auth::user()->email)->send(new EmailClass('regConf.missReg'));}
-    
+
     public function show($user_id)
     {
         $miss=new Miss;
@@ -200,21 +222,21 @@ class MisssController extends Controller
     public function edit($id)
     {
         $ucountry=Auth::user()->ucountry;
-        
+
         $miss=new Miss;
-      
+
         $miss -> setTable('爱尔兰_miss_tbl');
-        $miss= $miss->find($id);  
+        $miss= $miss->find($id);
        // $miss= Miss::find($id);
        // if(auth()->user()->id!=$miss->user_id){
-        
+
         if(auth()->user()->id!=$miss->user_id){
             //need to confirm if '/posts'
             return redirect('/posts')->with('error','unathorized page');
         }
 
         return view('misss.miss_edit')->with('miss',$miss)->with('ucountry',$ucountry);
-    
+
     }
 
     /**
@@ -235,13 +257,13 @@ class MisssController extends Controller
         ]);
 
         $uname=auth()->user()->username;
-        
+
         $status = Status::find($id);
         $status_uname=Status::where('uname', '=', $uname)->first();
         if ($status_uname!=null) {
             // user found
-         
-        
+
+
             $miss = Miss::find($id);
             //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
             $miss->city = $request->input('city');
@@ -249,11 +271,11 @@ class MisssController extends Controller
             $miss->tel = $request->input('tel');
             $miss->addr1 = $request->input('addr1');
             $miss->addr2 = $request->input('addr2');
-            
+
             // Handle File Upload
             $i=0;
             if($request->hasFile('filename')){
-                
+
                 foreach ($request->file('filename') as $photo){
                     // Get filename with the extension
                     $filenameWithExt = $photo->getClientOriginalName();
@@ -270,7 +292,7 @@ class MisssController extends Controller
                     $miss->{$img_column}=$fileNameToStore[$i];
                     $i++;
                 }
-            } 
+            }
             /*
             else {
                 $fileNameToStore = 'no-user.jpg';
@@ -279,20 +301,20 @@ class MisssController extends Controller
             */
 
             // Create Post
-            
+
             //$miss->img_name = $fileNameToStore[0];
             //if($i>0)
             //need to modify, there is error if only 1 file to upload
             //$img1= $fileNameToStore[1];
-            
-            
+
+
             //$miss->img1=$img1;
-            
+
 
             //$miss->user_id = $request->input('user_id');
             $miss->intro = $request->input('intro');
             $miss->type = $request->type;
-            
+
             //give 2 months free using
             //$miss->expire_at = date('Y-m-d', strtotime(' + 2months'));
             //$post->cover_image = $fileNameToStore;
@@ -302,27 +324,27 @@ class MisssController extends Controller
 
 
             //store data to status tbl
-            
+
             //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
             $status->user_id = Auth::user()->id;
             $status->uname = $uname;
-            
-            
+
+
             $status->verified= 0;
-            
-            
-            
+
+
+
             $status->last_update=date("Y-m-d");
             $status->save();
 
 
 
-            
+
         return redirect('/')->with('success', 'Post updated');
         }else{
             return redirect('/posts')->with('fail', 'U have post already');
         }
-   
+
     }
 
     /**

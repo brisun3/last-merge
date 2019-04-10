@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -83,8 +84,8 @@
         @include('inc.navbar')
         <!--<main class="py-4">-->
             
-                @include('inc.messages')
-                @yield('content')
+        @include('inc.messages')
+        @yield('content')
             
             
         <!--</main>-->

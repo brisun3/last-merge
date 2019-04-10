@@ -11,7 +11,7 @@
   {!!Form::open(['action' => 'MisssController@store', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
   type{{Form::select('type', ['L' => 'Large', 'S' => 'Small'], 'S')}};
 
-  
+
   <div class="form-group form-inline">
     {{Form::label('city', '城市 :  ')}}
     {{Form::text('city', '', ['class' => 'form-control', 'placeholder' => '城市'])}}
@@ -27,21 +27,21 @@
   <div class="form-group form-inline ">
     {{Form::label('addr2', '详细地址 :  ')}}
     {{Form::text('addr2', '', ['class' => 'form-control', 'class' => 'input-1000', 'placeholder' => '地址'])}}
-    
+
     <input id="show_marker" type="button" class="btn btn-primary" value="在地图中查看位置是否正确">
     <label class="label-note">注：本地址用于在地图上标出，以方便顾客查找。因此要实际存在地址，可误差20-30米，地址文字不在网页上显示.</label>
   </div>
-  
-  
+
+
   <input id="address" type="textbox" value="Dublin">
-  
+
   <div id="map" style="height:333px;width:222px;overflow: visible;"></div>
-  
+
   <div class="form-group ">
       {{Form::label('intro', '自我介绍 :')}}
       {{Form::textarea('intro', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => '文字自述'])}}
   </div>
-  	
+
   <h5>个人详情</h5>
   <div class="form-group form-inline">
     {{Form::label('age', '年龄 :')}}
@@ -55,7 +55,7 @@
     {{Form::label('shape', '身材型 :')}}
     {{Form::text('shape', '', ['class' => 'form-control', 'placeholder' => '如：苗条，丰满，匀称'])}}
   </div>
-  
+
   <div class="form-group form-inline">
     {{Form::label('skin', '皮肤 :')}}
     {{Form::text('skin', '', ['class' => 'form-control', 'placeholder' => '皮肤'])}}
@@ -72,7 +72,7 @@
     {{Form::label('waist', '腰围 :')}}
     {{Form::text('waist', '', ['class' => 'form-control', 'placeholder' => '腰围'])}}
   </div>
-  
+
   <div class="form-group form-inline">
     {{Form::label('weight', '体重 :')}}
     {{Form::text('weight', '', ['class' => 'form-control', 'placeholder' => '体重'])}}
@@ -85,6 +85,10 @@
   <div class="form-group form-inline">
     {{Form::label('lan2', '其它语言或方言 :')}}
     {{Form::text('lan2', '', ['class' => 'form-control', 'placeholder' => '其它语言'])}}
+  </div>
+  <div class="form-group form-inline">
+    {{Form::label('lan_des', '语言说明 :')}}
+    {{Form::text('lan_des', '', ['class' => 'form-control', 'placeholder' => '语言说明'])}}
   </div>
   <h5>价格</h5>
   <div class="form-group form-inline">
@@ -99,7 +103,7 @@
     {{Form::label('price_out', '上门服务价格 ：')}}
     {{Form::text('price_out', '', ['class' => 'form-control', 'placeholder' => '上门服务价格'])}}
   </div>
-  
+
   <div class="form-group form-inline">
     {{Form::label('price_note', '价格说明：')}}
     {{Form::text('price_note', '', ['class' => 'form-control', 'placeholder' => '价格说明'])}}
@@ -113,26 +117,26 @@
     {{Form::label('special_serv', '特色服务：')}}
     {{Form::text('special_serv', '', ['class' => 'form-control', 'placeholder' => '特色服务'])}}
   </div>
-  
+
   <div class="form-group form-inline">
-    {{Form::label('western_serv', '是否接待洋人：')}}
+    {{Form::label('western_serv', '是否接待西方人：')}}
     {{Form::checkbox('western_serv', '',null, ['class' => 'form-control,checkbox'])}}
   </div>
-  
- 
+
+
   <h5>上传图片</h5>
       <div class="input-group control-group increment" >
         <input type="file" name="filename[]" class="form-control">
-        
-        <div class="input-group-btn"> 
+
+        <div class="input-group-btn">
           <button id="add_file" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>加载更多图片</button>
         </div>
-        
+
       </div>
       <div class="clone hide">
         <div class="control-group input-group" style="margin-top:10px">
           <input type="file" name="filename[]" class="form-control" multiple>
-          <div class="input-group-btn"> 
+          <div class="input-group-btn">
             <button id="remove_file" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> 取消本图片</button>
           </div>
         </div>
@@ -140,8 +144,8 @@
 
       <button type="submit" class="btn btn-primary" style="margin-top:10px">登记</button>
 
-      {!! Form::close() !!}     
-  </div> 
+      {!! Form::close() !!}
+  </div>
 
 </div>
 
@@ -149,13 +153,13 @@
 
   $(document).ready(function() {
 
-    $("#add_file").click(function(){ 
+    $("#add_file").click(function(){
         var html = $(".clone").html();
         $(".increment").after(html);
     });
 
-    $("body").on("click","#remove_file",function(){ 
-      
+    $("body").on("click","#remove_file",function(){
+
         $(this).parents(".control-group").remove();
     });
 
@@ -202,17 +206,16 @@
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi9zEbNbmidV5rNdS3kcM0gEW1oAOYelY&callback=initMap">
 </script>
 
-<link rel= "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">   
-   
+<link rel= "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
 @endsection
-        
+
 
 
     <? php
     /*
     $tags = get_meta_tags('http://www.geobytes.com/IpLocator.htm?GetLocation&template=php3.txt&IpAddress=' . $_SERVER['REMOTE_ADDR']);
     echo $tags['country'];
-    echo $tags['city']; 
+    echo $tags['city'];
     **/
     ?>
-                    

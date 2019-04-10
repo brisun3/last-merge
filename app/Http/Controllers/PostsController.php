@@ -61,7 +61,8 @@ class PostsController extends Controller
                 case('massage'):
                     return view('posts/massage_create');
                 case('ptmiss'):
-                    return view('posts/ptmiss_create');
+                    return view('ptmisss.ptmiss_create')->with('uname',$uname)
+                    ->with('ucountry',$ucountry);
                 case('baoyang'):
                     return view('posts/baoyang_create');
                 case('commercial'):
