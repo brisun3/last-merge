@@ -88,30 +88,34 @@
                                 不提供服务场所
                             </div>
                         @endif
-                        <a href="" class="btn btn-basic">email me</a>
+                        @if($post->serv_start && $post->serv_end)
+                                <p>营业时间:{{$post->serv_start}}-{{$post->serv_end}}</p>
+                            @endif
              
                     </div>
                     
                     <div class="col-md-3">
                         <ul>
-                            <li>位置:{{$post->addr}}</li>
+                                <li>位置:{{$post->addr}}</li>
                             @if($post->age)
-                            <li>年龄:{{$post->age}}</li>
+                                <li>年龄:{{$post->age}}</li>
                             @endif
                             @if($post->price)
-                            <li>价格:{{$post->price}}</li>
+                                <li>价格:{{$post->price}}</li>
                             @endif
                             @if($post->price_out)
-                            <li>上门服务:{{$post->price_out}}</li>
+                                <li>上门服务:{{$post->price_out}}</li>
                             @endif
                             @if($post->lan)
-                            <li>语言:{{$post->lan}}</li>
+                                <li>语言:{{$post->lan}}</li>
                             @endif
                         
                             @if($post->service_des)
-                            <li>服务内容:{{$post->service_des}}</li>
+                                <li>服务内容:{{$post->service_des}}</li>
                             @endif
+                            
                         </ul>
+                        
                         <small>&nbsp&nbsp刷新日期：{{$createDM}}  </small>
                     </div>
                     

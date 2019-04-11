@@ -17,7 +17,7 @@ class Baoyang extends Model
     
     //protected $table = $country.'posts';
     
-    // Primary Key
+    
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = true;
